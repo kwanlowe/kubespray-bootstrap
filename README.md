@@ -169,3 +169,14 @@ This contains the admin.conf file (point KUBECONFIG to this file for authenticat
 NOTE: If you shutdown the nodes, you will almost certainly need to re-add 
 firewall rules to allow SSH traffic from your local IP to the GCP external
 address of the instances.
+
+## But wait, there's more...
+
+* The checkov tool to check Terraform resources is also included. It is not
+detailed, but has a few interesting checks available to help validate a 
+build. To run:
+
+      make install-checkov
+      checkov -d tf/workers
+
+
