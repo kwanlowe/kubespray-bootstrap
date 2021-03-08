@@ -163,3 +163,9 @@ This contains the admin.conf file (point KUBECONFIG to this file for authenticat
 
 
 * Your cluster should be complete and ready for workloads.
+
+
+* Once you are done testing, make sure to manage the costs appropriately. 
+NOTE: If you shutdown the nodes, you will almost certainly need to re-add 
+firewall rules to allow SSH traffic from your local IP to the GCP external
+address of the instances.
