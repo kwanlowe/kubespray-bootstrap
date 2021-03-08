@@ -15,7 +15,7 @@ to demonstrate the setup.
 
 ![Test 2] (../kubespray.png)
 
-![Test 3] (https://kwanlowe.github.com/images/kubespray.png)
+![Test 3] (https://github.com/kwanlowe/kubespray-bootstrap/blob/embed-image-in-doc/kubespray.png?raw=true)
 
 
 ## Setup
