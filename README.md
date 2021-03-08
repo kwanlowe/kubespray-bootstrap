@@ -185,3 +185,10 @@ build. To run:
       checkov -d tf/workers
 
 
+## References
+
+* https://kubespray.io/#/
+* https://kubernetes.io/docs/setup/production-environment/tools/kubespray/
+* https://github.com/kubernetes-sigs/kubespray
+* https://www.redhat.com/sysadmin/kubespray-deploy-kubernetes
+
