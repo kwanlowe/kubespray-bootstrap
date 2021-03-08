@@ -159,6 +159,8 @@ This contains the admin.conf file (point KUBECONFIG to this file for authenticat
 
 * Test the installation:
 
+    cd ~/src/kubespray/inventory/mycluster/artifacts
+    export KUBECONFIG=$(pwd)/admin.conf
     ./kubectl get nodes
 
 
