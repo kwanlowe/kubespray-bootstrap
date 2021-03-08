@@ -12,7 +12,9 @@ There are other ways to do this, such as running a kubespray container, but this
 to demonstrate the setup.
 
 ![Test 1] (kubespray.png)
+
 ![Test 2] (../kubespray.png)
+
 ![Test 3] (https://kwanlowe.github.com/images/kubespray.png)
 
 
