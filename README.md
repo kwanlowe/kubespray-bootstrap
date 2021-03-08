@@ -2,35 +2,74 @@
 
 This is a set of files to bootstrap Kubespray, which in turn is a tool to bootstrap Kubernetes.
 
-This creates a local installation of python, ansible and terraform in order to bootstrap a Google Compute Platform Kubernetes installation.
+This creates a local installation of python, ansible and terraform in order to bootstrap a 
+Google Compute Platform Kubernetes installation. The process first sets up the local workstation,
+builds a jumpoff and worker nodes in the cloud, downloads the kubespray repository and does some
+initial configuration. Once this process is done, you should be able to kick off the kubespray 
+installation itself. Yes, this is a bootstrap to a bootstrap.
+
+There are other ways to do this, such as running a kubespray container, but this repo is intended
+to demonstrate the setup.
+
+
 
 ## Setup
 
-Quickstart should be:
+* Preqrequisites
+
+  * Google Cloud Project, with credentials downloaded
+  * Linux environment (tested on Linux Mint, CentOS, WSL)
+
+
+* Quickstart should be:
 
     git clone https://github.com/kwanlowe/kubespray-bootstrap-test.git
     cd kubespray-bootstrap
     make setup
 	source setup.env
 
-Once setup, initialize the Terraform environment and apply. This example is in GCP and creates a free-tier resource.
+* Once you source the setup file, run a couple quick checks to make sure everything is in order:
 
-    cd tf/gcp
-    terraform init
-    terraform apply
+    which gcloud
+	which ansible
+	which terraform
 
-Return to the checkov base directory to run the scan.
+  Output should show the local installation versus either the system installation (or 'command not found'.
 
-    cd ../../
-    checkov -d tf/gcp
+* Next, enable your GCP credential:
+
+    
+    export GOOGLE_APPLICATION_CREDENTIALS=~< PATH to Creds file >
+
+E.g.:
 
 
-To integrate bridgecrew visualization, go to bridgecrew.cloud then the API integrations and copy the key. IN PROGRESS
+    export GOOGLE_APPLICATION_CREDENTIALS=~~/.ssh/kubespray-project-12345.json
 
-## GCP
+Test your credentials with:
 
-Download the credentials then export the variable to point to the JSON file.
+    gcloud projects list
 
-    export GOOGLE_APPLICATION_CREDENTIALS=~/.ssh/kubespray-rccl-6c31ddf6cafa.json
+You should see a list of projects associated with that ID. NOTE: This depends on you have configured
+the particular IAM permissions associated with the credentials. If you are prompted to authenticate 
+further, you may need to run ```gcloud auth login``` to prime the credentials.
+
+
+
+* If all looks good, you can now initialize the Terraform playbook:
+
+    make terraform-init-workers
+
+This sets up Terraform by downloading plugins and other housekeeping. 
+
+NOTE: Before building, check out the tf/workers/main.tf file to see what is being built. Unfortunately,
+the installation cannot use GCP free tier resources because of memory requirements. At current pricing, 
+this will cost about $50/month for the resources. 
+
+* Now, build out the infrastructure with:
+
+    make deploy-gcp-kubespray
+
+  Review the changes this will make and enter 'yes' at the prompt.
 
 
