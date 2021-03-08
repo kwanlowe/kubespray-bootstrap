@@ -155,9 +155,11 @@ This contains the admin.conf file (point KUBECONFIG to this file for authenticat
 
 * Test the installation:
 
-    cd ~/src/kubespray/inventory/mycluster/artifacts
-    export KUBECONFIG=$(pwd)/admin.conf
-    ./kubectl get nodes
+      cd ~/src/kubespray/inventory/mycluster/artifacts
+      export KUBECONFIG=$(pwd)/admin.conf
+      ./kubectl get nodes
+
+      kubectl apply -f https://k8s.io/examples/application/deployment.yaml
 
 
 * Your cluster should be complete and ready for workloads.
