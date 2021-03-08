@@ -42,8 +42,7 @@ to demonstrate the setup.
 
 E.g.:
 
-
-    export GOOGLE_APPLICATION_CREDENTIALS=~~/.ssh/kubespray-project-12345.json
+      export GOOGLE_APPLICATION_CREDENTIALS=~~/.ssh/kubespray-project-12345.json
 
 Test your credentials with:
 
@@ -52,8 +51,6 @@ Test your credentials with:
 You should see a list of projects associated with that ID. NOTE: This depends on you have configured
 the particular IAM permissions associated with the credentials. If you are prompted to authenticate 
 further, you may need to run ```gcloud auth login``` to prime the credentials.
-
-
 
 * If all looks good, you can now initialize the Terraform playbook:
 
