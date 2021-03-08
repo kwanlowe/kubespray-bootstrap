@@ -1,0 +1,31 @@
+- name: Install kubectl
+  hosts: jumpoff
+
+  tasks:
+
+  - name: "Get current kubectl version"
+    get_url:
+      url: "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
+      dest: /tmp/latest-kubectl 
+      mode: '0440'
+
+  - name: "Download binary"
+    debug:
+      msg: "Placeholder"
+
+  - name: "Register kubectl version"
+    command: "cat /tmp/latest-kubectl"
+    register: latest_kubectl
+
+  - name: "Check"
+    debug:
+      msg: "Version is {{ latest_kubectl.stdout }}"
+
+  - name: "Download kubectl version"
+    get_url:
+      url: "https://storage.googleapis.com/kubernetes-release/release/{{ latest_kubectl.stdout }}/bin/linux/amd64/kubectl"
+      dest: ~/bin/kubectl
+      mode: '0750'
+
+
+

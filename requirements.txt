@@ -1,0 +1,5 @@
+dataclasses
+checkov
+ansible
+bridgecrew
+paramiko

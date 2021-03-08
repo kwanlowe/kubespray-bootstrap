@@ -1,0 +1,27 @@
+---
+- name: Install public key
+  hosts: workers
+  remote_user:  "{{ gcloud_remote_user | default('root')}}"
+
+  tasks:
+
+  - name: Install authorized key in worker nodes
+    authorized_key:
+      user: "{{ gcloud_remote_user }}"
+      state: present
+      key: "{{ lookup('file', 'keys/jumpoff.pub') }}"
+
+# - name: Install private key
+#   hosts: jumpoff
+#   remote_user:  "{{ gcloud_remote_user | default('root')}}"
+# 
+#   tasks:
+# 
+#   - name: Install private key in jumpoff host
+#     copy:
+#       src: "keys/jumpoff"
+#       dest: "/home/{{ gcloud_remote_user }}/.ssh/id_rsa" 
+#       owner: "{{ gcloud_remote_user }}"
+#       group: "{{ gcloud_remote_user }}"
+#       mode: 0600
+#   

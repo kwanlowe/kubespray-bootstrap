@@ -1,0 +1,57 @@
+- name: Install private key
+  hosts: jumpoff
+
+  tasks:
+
+  - name: Install required packages
+    apt:
+      pkg: 
+        - make
+        - virtualenv
+      state: latest
+      update_cache: yes
+    become: true
+
+  - name: Git checkout
+    ansible.builtin.git:
+      repo: 'https://github.com/kubernetes-sigs/kubespray.git'
+      dest: ~/src/kubespray
+
+  - name: Get stats of a file
+    ansible.builtin.stat:
+      path: "~/bin/python_venv/"
+    register: venv_exists
+
+
+  - name: "Setup virtualenv"
+    command: "{{ item }}"
+    when: venv_exists.stat.exists == False
+    with_items:
+      - "mkdir -p ~/bin/python_venv/"
+      - "virtualenv --python=/bin/python3 ~/bin/python_venv/"
+
+  - name: "Copy sample inventory"
+    synchronize:
+      src: ~/src/kubespray/inventory/sample/
+      dest: ~/src/kubespray/inventory/mycluster
+    delegate_to: "{{ inventory_hostname }}"
+
+
+  - name: "enable kubectl_localhost"
+    replace:
+      path: "~/src/kubespray/inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml"
+      regexp: '# kubectl_localhost: false'
+      replace: 'kubectl_localhost: true'
+
+  - name: "Enable kubeconfig_localhost"
+    replace:
+      path: "~/src/kubespray/inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml"
+      regexp: '# kubeconfig_localhost: false'
+      replace: 'kubeconfig_localhost: true'
+
+  - pip:
+      extra_args: --upgrade
+      executable: "~/bin/python_venv/bin/pip"
+      state: latest
+      requirements: ~/src/kubespray/requirements.txt
+

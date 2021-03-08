@@ -1,0 +1,16 @@
+- name: Configure kubespray
+  hosts: jumpoff
+
+  tasks:
+
+  - name: "enable kubectl_localhost"
+    replace:
+      path: "~/src/kubespray/inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml"
+      regexp: '# kubectl_localhost: false'
+      replace: 'kubectl_localhost: true'
+
+  - name: "Enable kubeconfig_localhost"
+    replace:
+      path: "~/src/kubespray/inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml"
+      regexp: '# kubeconfig_localhost: false'
+      replace: 'kubeconfig_localhost: true'

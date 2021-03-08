@@ -1,0 +1,15 @@
+- name: Install private key
+  hosts: jumpoff
+  remote_user:  "{{ gcloud_remote_user | default('root')}}"
+
+  tasks:
+
+  - name: Install private key in jumpoff host
+    copy:
+      src: "keys/jumpoff"
+      # dest: "~/.ssh/id_rsa" 
+      dest: "/home/{{ gcloud_remote_user }}/.ssh/id_rsa" 
+      owner: "{{ gcloud_remote_user }}"
+      group: "{{ gcloud_remote_user }}"
+      mode: "0600"
+  
