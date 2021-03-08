@@ -132,11 +132,20 @@ These next steps are done on the jumpoff host.
 
     gcloud compute ssh vm-bastion-001
 
+* Enable the local python installation:
+
+    source bin/python_venv/bin/activate
+
+
 * Run the generate inventory commands.
 
     cd src/kubespray
     declare -a IPS=(10.128.0.4 10.128.0.5 10.128.0.2 )
     CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
+
+* Run the kubespray playbook:
+
+    ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
 
 * Wait.
 
