@@ -11,6 +11,8 @@ installation itself. Yes, this is a bootstrap to a bootstrap.
 There are other ways to do this, such as running a kubespray container, but this repo is intended
 to demonstrate the setup.
 
+![Generated Inventory]
+(https://kwanlowe.github.com/images/kubespray.png)
 
 
 ## Setup
