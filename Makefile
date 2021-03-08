@@ -38,7 +38,7 @@ generate-inventory:
 	@gcloud compute instances list|awk 'BEGIN{print"[workers]\n"} NR>1 && /worker/{printf "%s ansible_ssh_private_key_file=$(PRIVKEY)\n", $$5}' >inventory/hosts
 	@gcloud compute instances list|awk 'BEGIN{print"[jumpoff]\n"} NR>1 && /bastion/{printf "%s ansible_ssh_private_key_file=$(PRIVKEY)\n", $$5}' >>inventory/hosts
 
-setup: install-ansible install-terraform
+setup: install-google-cloud-sdk 	install-ansible 	install-terraform
 	@echo Enable the python virtual environment with:
 	@echo "    source $(VENV)/bin/activate"
 	@echo Add the binary directory to your path with:

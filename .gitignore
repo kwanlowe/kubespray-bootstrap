@@ -1,0 +1,12 @@
+python_venv/
+bin/
+tmp/
+.terraform
+.terraform.lock.hcl
+.*.swp
+inventory/
+playbooks/keys/
+tf/workers/terraform.tfstate
+tf/workers/terraform.tfstate.backup
+
+
