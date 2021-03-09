@@ -7,6 +7,10 @@ BINPATH=bin
 TFDIR=tf/gcp
 PRIVKEY=/home/kwan/.ssh/google_compute_engine
 
+
+help:
+	@grep '^[a-z].*:$$' Makefile|tr -d ':'
+
 install-google-cloud-sdk:
 	mkdir -p $(SCRATCH) $(BINPATH)
 	wget -P tmp/ $(GCP_BINARY_URL)
