@@ -15,7 +15,7 @@ variable "client_external_ip" {
 
 resource "google_os_login_ssh_public_key" "cache" {
     user =  data.google_client_openid_userinfo.me.email
-    key = file("/home/kwan/.ssh/kubespray.pub")
+    key = file("/path/to/you/pub/key")
 }
 
 resource "google_compute_instance" "vm_instance" {
