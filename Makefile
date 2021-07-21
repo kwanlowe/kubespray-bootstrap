@@ -33,7 +33,7 @@ install-terraform:
 	wget -P tmp/ $(TF_BINARY_URL)
 	@$(eval TF_BASENAME=$(shell sh -c "basename $(TF_BINARY_URL)"))
 	echo $(TF_BASENAME)
-	unzip -p $(SCRATCH)/$(TF_BASENAME) terraform >./$(BINPATH)/terraform
+	unzip -p $(SCRATCH)/$(TF_BASENAME) terraform >$(BINPATH)/terraform
 	chmod +x bin/terraform
 	pwd
 
